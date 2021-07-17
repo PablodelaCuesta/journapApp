@@ -4,7 +4,7 @@ export const NotesAppBar = () => {
     return (
         <div className="notes__appbar">
 
-            <span>17 de julio de 2021</span>
+            <span>18 de julio de 2021</span>
             <div>
                 <button className="btn">
                     Pictures
