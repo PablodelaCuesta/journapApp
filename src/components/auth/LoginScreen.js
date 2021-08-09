@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth"
 import { useForm } from "../../hooks/useForm"
@@ -6,10 +6,11 @@ import { useForm } from "../../hooks/useForm"
 export const LoginScreen = () => {
 
     const dispatch = useDispatch()
+    const { loading } = useSelector( state => state.ui )
 
     const [ formValues, handleInputChange ] = useForm({
-        email: 'pablodelacuesta@outlook.es',
-        password: 1234
+        email: '',
+        password: ''
     })
 
     const {email, password} = formValues
@@ -17,7 +18,7 @@ export const LoginScreen = () => {
     // Cada vez que se realiza un cambio se actualiza el State del formulario, por lo que al extraer cada valor de las variables obtenemos el valor actual del input
     const handleLogin = (e) => {
         e.preventDefault()
-        console.log(email, password)
+
         dispatch( startLoginEmailPassword(email, password) )
     }
 
@@ -30,10 +31,19 @@ export const LoginScreen = () => {
             <h3 className="auth__title">Login</h3>
 
             <form onSubmit={handleLogin}>
-                <input className="auth__input" type="text" placeholder="Email" name="email" value={ email } onChange={handleInputChange} /> 
-                <input className="auth__input" type="password" placeholder="Password" name="password" value={ password } onChange={handleInputChange} />
 
-                <button className="btn btn-primary btn-block" type="submit"> Login </button>
+                <input className="auth__input" 
+                type="text" placeholder="Email" 
+                name="email" 
+                value={ email } onChange={handleInputChange} /> 
+
+                <input className="auth__input" 
+                type="password" placeholder="Password" 
+                name="password" 
+                value={ password } onChange={handleInputChange} />
+
+                <button className="btn btn-primary btn-block" 
+                type="submit" disabled={ loading }> Login </button>
 
                 <div className="auth__social-networks">
                     <p>Login with social networks</p>

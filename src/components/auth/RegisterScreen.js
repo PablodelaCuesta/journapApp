@@ -32,7 +32,7 @@ export const RegisterScreen = () => {
 
     const isValidForm = () => {
 
-        if ( name.trim().length == 0 ) {
+        if ( name.trim().length === 0 ) {
 
             const msg = 'Name incorrecto'
             console.log(msg)
